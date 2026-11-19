@@ -1,0 +1,45 @@
+[
+ {
+  "shape": "Bento Grid",
+  "theme": "darkroom",
+  "axes": "dark/display-condensed/chromatic-amber",
+  "hero": "Ledge",
+  "nav": "edge-aligned",
+  "footer": "mast",
+  "imagery": "photographs, library 12, colour",
+  "photos": [
+   "Farjad_jolani_Cinematographer",
+   "Appartment_building_from_Banner_Street_2024-01-11",
+   "Paris_-_A_waiter_lighting_candles_in_a_bar_-_3418",
+   "Microscope_Nachet_et_Fils",
+   "Aerial_View_Hailing_Island",
+   "Lobby_lounge_Amantaka",
+   "Matcha_tea_latte",
+   "Almond_croissant",
+   "Bumbu_dan_Rempah",
+   "Perfume_glass_bottle",
+   "Rosemary_Oil",
+   "Steelport_Chef_Knife"
+  ],
+  "entry": "hero rack focus",
+  "fingerprint": "1abc86",
+  "sections": [
+   "Hero",
+   "Bento",
+   "Index",
+   "Statement",
+   "Sheet",
+   "Form",
+   "Footer"
+  ],
+  "signature": "rack-focus WebGL hero across four disciplines",
+  "waived": [
+   "6b",
+   "77",
+   "83"
+  ],
+  "prompt": "Team Despond Sydney film photo video agency",
+  "date": "2026-11-19",
+  "mode": "build"
+ }
+]
