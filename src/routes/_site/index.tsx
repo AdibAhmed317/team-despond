@@ -5,7 +5,8 @@ import { Photo } from '#/components/Photo'
 import { EnquiryForm } from '#/components/EnquiryForm'
 import { Fill, Socials } from '#/components/Chrome'
 import { Reveal, RiseWords } from '#/components/motion'
-import { contact, serviceBySlug } from '#/content/site'
+import { Dolly } from '#/components/Dolly'
+import { contact, photos, serviceBySlug } from '#/content/site'
 import type { Project } from '#/content/site'
 import { listProjects, listServices } from '#/server/content'
 
@@ -23,6 +24,22 @@ const reasons = [
   { title: 'Attention to detail', line: 'The crumb on the plate, the line of the doorframe, the last frame.' },
   { title: 'Tailored solutions', line: 'A brief shaped around your venue, property or product.' },
 ]
+
+const statement = 'A Sydney crew for film, property, food and product, telling each one as a story.'
+const statementFoot = (
+  <>
+    <p>
+      Team Despond is a creative production and visual media studio. We plan, shoot and cut the pictures brands sell
+      with.
+    </p>
+    <Link to="/about" className="text-link">
+      About the studio
+    </Link>
+  </>
+)
+// The dolly's frames: every photo once, the four kinds of work dealt in turn.
+const all = Object.values(photos)
+const dollyPhotos = all.map((_, i) => all[(i % 4) * (all.length / 4) + Math.floor(i / 4)]).filter(Boolean)
 
 function Home() {
   const { services, featured } = Route.useLoaderData()
@@ -65,20 +82,14 @@ function Home() {
 
       <FeaturedWork projects={featured} />
 
-      <section className="section well grained" aria-labelledby="about-head">
-        <div className="container statement">
-          <RiseWords id="about-head" className="statement__line" text="A Sydney crew for film, property, food and product, telling each one as a story." />
-          <div className="statement__foot">
-            <p>
-              Team Despond is a creative production and visual media studio. We plan, shoot and cut the pictures
-              brands sell with.
-            </p>
-            <Link to="/about" className="text-link">
-              About the studio
-            </Link>
+      <Dolly id="about-head" line={statement} photos={dollyPhotos} foot={statementFoot} fallback={
+        <section className="section well grained" aria-labelledby="about-head">
+          <div className="container statement">
+            <RiseWords id="about-head" className="statement__line" text={statement} />
+            <div className="statement__foot">{statementFoot}</div>
           </div>
-        </div>
-      </section>
+        </section>
+      } />
 
       <section className="section" aria-labelledby="why-head">
         <div className="container sheet-wrap">

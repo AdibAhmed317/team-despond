@@ -1,4 +1,4 @@
-import { createElement, Fragment } from 'react'
+import { createElement, Fragment, useEffect, useState } from 'react'
 import { motion, MotionConfig } from 'motion/react'
 
 // Motion vocabulary for the site, kept small on purpose:
@@ -11,6 +11,23 @@ const ease = [0.16, 1, 0.3, 1] as const
 
 export function MotionProvider({ children }: { children: React.ReactNode }) {
   return <MotionConfig reducedMotion="user">{children}</MotionConfig>
+}
+
+/**
+ * True only where the WebGL set pieces (reel, dolly) run: desktop, fine pointer,
+ * WebGL2, no reduced-motion preference. False on the server and first render,
+ * so pages hydrate with the plain fallback and upgrade after.
+ */
+export function useCinema() {
+  const [on, setOn] = useState(false)
+  useEffect(() => {
+    setOn(
+      window.matchMedia('(min-width: 64rem) and (pointer: fine)').matches &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+        !!document.createElement('canvas').getContext('webgl2'),
+    )
+  }, [])
+  return on
 }
 
 /** Settles into place once, when it scrolls into view. `data-m` lets the noscript rule show it without JS. */

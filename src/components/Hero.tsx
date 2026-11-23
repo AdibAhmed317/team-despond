@@ -6,7 +6,7 @@ import { createRackFocus } from '#/components/rack-focus'
 import { RiseWords } from '#/components/motion'
 import type { RackFocus } from '#/components/rack-focus'
 
-const PULL_MS = 1100
+const PULL_MS = 750
 
 export function Hero({ services }: { services: Service[] }) {
   const [active, setActive] = useState(0)

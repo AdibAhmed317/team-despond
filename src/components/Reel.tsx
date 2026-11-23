@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { useMotionValueEvent, useScroll } from 'motion/react'
 import type { Project } from '#/content/site'
+import { useCinema } from '#/components/motion'
 
 // The reel: every frame of the portfolio on a curved wall, the way a cinema
 // screen wraps a room. The section pins while you scroll; scroll pans the wall,
@@ -17,15 +18,7 @@ const HEIGHT = 2.2
 const GAP = 0.5
 
 export function Reel(props: { projects: Project[]; nameOf: (slug: string) => string }) {
-  const [enabled, setEnabled] = useState(false)
-  useEffect(() => {
-    setEnabled(
-      window.matchMedia('(min-width: 64rem) and (pointer: fine)').matches &&
-        !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
-        !!document.createElement('canvas').getContext('webgl2'),
-    )
-  }, [])
-  return enabled ? <ReelStage {...props} /> : null
+  return useCinema() ? <ReelStage {...props} /> : null
 }
 
 function ReelStage({ projects, nameOf }: { projects: Project[]; nameOf: (slug: string) => string }) {

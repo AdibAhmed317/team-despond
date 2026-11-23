@@ -91,7 +91,7 @@ main a:not([class]):hover { text-decoration-color: var(--color-accent); }
 /* ---------- hero: Ledge, rack focus ---------- */
 .hero { position: relative; isolation: isolate; display: grid; align-items: end; min-height: 100svh; }
 .hero__reel { position: absolute; inset: 0; z-index: 0; background: var(--color-paper-2); color: var(--color-ink); }
-.hero__frame { position: absolute; inset: 0; opacity: 0; transition: opacity 700ms var(--ease-in-out); }
+.hero__frame { position: absolute; inset: 0; opacity: 0; transition: opacity 450ms var(--ease-in-out); }
 .hero__frame.is-on { opacity: 1; }
 .hero__reel[data-pulling] .hero__frame { transition: none; }
 .hero__gl { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; opacity: 0; pointer-events: none; filter: var(--photo-filter); }
@@ -385,3 +385,14 @@ main a:not([class]):hover { text-decoration-color: var(--color-accent); }
 .reel__now { display: flex; align-items: baseline; gap: var(--space-lg); min-height: var(--text-display-s); }
 .reel__title { font: 200 var(--text-display-s)/1 var(--font-display); text-transform: uppercase; }
 .reel__cat { color: var(--color-ink-2); font-size: var(--text-sm); }
+
+/* ---------- dolly: the home statement as a push-in (desktop only, see Dolly.tsx) ---------- */
+.dolly { position: relative; height: 340vh; }
+.dolly__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; align-items: center; }
+.dolly__canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 900ms var(--ease-out); }
+.dolly__canvas[data-ready] { opacity: 1; }
+/* Darkens the centre of the frame so the words read over whatever passes behind them. */
+.dolly__veil { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 55% at 30% 50%, color-mix(in oklch, var(--color-paper-2) 78%, transparent), transparent 75%); }
+.dolly__ui { position: relative; z-index: 2; }
+.dolly__word { opacity: calc(0.14 + 0.86 * clamp(0, var(--t, 0) * var(--n, 1) - var(--i, 0), 1)); }
+.dolly__foot { opacity: var(--f, 0); transform: translateY(calc((1 - var(--f, 0)) * 16px)); }
