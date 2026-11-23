@@ -1,12 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { EnquiryForm } from '#/components/EnquiryForm'
+import { RiseWords } from '#/components/motion'
 import { Fill, Socials } from '#/components/Chrome'
 import { contact, services } from '#/content/site'
 import type { CategorySlug } from '#/content/site'
 
 const slugs = services.map((s) => s.slug)
 
-export const Route = createFileRoute('/_v1/contact')({
+export const Route = createFileRoute('/_site/contact')({
   validateSearch: (s: Record<string, unknown>): { service?: CategorySlug } =>
     slugs.includes(s.service as CategorySlug) ? { service: s.service as CategorySlug } : {},
   head: () => ({
@@ -24,7 +25,7 @@ function Contact() {
     <section className="page-head page-head--form" aria-labelledby="contact-head">
       <div className="container form-split">
         <div className="form-split__head">
-          <h1 id="contact-head">Let’s work together</h1>
+          <RiseWords as="h1" id="contact-head" trigger="onLoad" text="Let’s work together" />
           <p className="lead">Tell us what you are making, where, and roughly when.</p>
           <dl className="facts">
             <div>

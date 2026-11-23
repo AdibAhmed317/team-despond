@@ -3,6 +3,7 @@ import { Link } from '@tanstack/react-router'
 import type { Service } from '#/content/site'
 import { Photo } from '#/components/Photo'
 import { createRackFocus } from '#/components/rack-focus'
+import { RiseWords } from '#/components/motion'
 import type { RackFocus } from '#/components/rack-focus'
 
 const PULL_MS = 1100
@@ -89,9 +90,7 @@ export function Hero({ services }: { services: Service[] }) {
         <p className="hero__caption" aria-live="polite">
           {current.summary}
         </p>
-        <h1 id="hero-head" className="hero__head">
-          We create visual stories that make brands stand out.
-        </h1>
+        <RiseWords as="h1" id="hero-head" className="hero__head" trigger="onLoad" text="We create visual stories that make brands stand out." />
         <div className="hero__foot">
           <p className="lead">
             From cinematic filmmaking to commercial photography and videography, we bring ideas to life through

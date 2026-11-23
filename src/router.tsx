@@ -7,6 +7,9 @@ export function getRouter() {
     scrollRestoration: true,
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
+    // Native View Transitions: pages crossfade and a project photo grows into its page.
+    // Browsers without support switch pages instantly.
+    defaultViewTransition: true,
   })
 
   return router

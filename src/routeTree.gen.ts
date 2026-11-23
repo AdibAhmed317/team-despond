@@ -9,288 +9,170 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as V1RouteImport } from './routes/_v1'
-import { Route as V2RouteRouteImport } from './routes/v2/route'
-import { Route as V1IndexRouteImport } from './routes/_v1/index'
-import { Route as V1AboutRouteImport } from './routes/_v1/about'
-import { Route as V1ContactRouteImport } from './routes/_v1/contact'
-import { Route as V1ServicesRouteImport } from './routes/_v1/services'
-import { Route as V2IndexRouteImport } from './routes/v2/index'
-import { Route as V2AboutRouteImport } from './routes/v2/about'
-import { Route as V2ContactRouteImport } from './routes/v2/contact'
-import { Route as V2ServicesRouteImport } from './routes/v2/services'
-import { Route as V1WorkIndexRouteImport } from './routes/_v1/work/index'
-import { Route as V1WorkSlugRouteImport } from './routes/_v1/work/$slug'
+import { Route as SiteRouteImport } from './routes/_site'
+import { Route as SiteIndexRouteImport } from './routes/_site/index'
+import { Route as SiteAboutRouteImport } from './routes/_site/about'
+import { Route as SiteContactRouteImport } from './routes/_site/contact'
+import { Route as SiteServicesRouteImport } from './routes/_site/services'
+import { Route as SiteWorkIndexRouteImport } from './routes/_site/work/index'
+import { Route as SiteWorkSlugRouteImport } from './routes/_site/work/$slug'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
-import { Route as V2WorkIndexRouteImport } from './routes/v2/work/index'
-import { Route as V2WorkSlugRouteImport } from './routes/v2/work/$slug'
 
-const V1Route = V1RouteImport.update({
-  id: '/_v1',
+const SiteRoute = SiteRouteImport.update({
+  id: '/_site',
   getParentRoute: () => rootRouteImport,
 } as any)
-const V2RouteRoute = V2RouteRouteImport.update({
-  id: '/v2',
-  path: '/v2',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const V1IndexRoute = V1IndexRouteImport.update({
+const SiteIndexRoute = SiteIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => V1Route,
+  getParentRoute: () => SiteRoute,
 } as any)
-const V1AboutRoute = V1AboutRouteImport.update({
+const SiteAboutRoute = SiteAboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => V1Route,
+  getParentRoute: () => SiteRoute,
 } as any)
-const V1ContactRoute = V1ContactRouteImport.update({
+const SiteContactRoute = SiteContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => V1Route,
+  getParentRoute: () => SiteRoute,
 } as any)
-const V1ServicesRoute = V1ServicesRouteImport.update({
+const SiteServicesRoute = SiteServicesRouteImport.update({
   id: '/services',
   path: '/services',
-  getParentRoute: () => V1Route,
+  getParentRoute: () => SiteRoute,
 } as any)
-const V2IndexRoute = V2IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => V2RouteRoute,
-} as any)
-const V2AboutRoute = V2AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => V2RouteRoute,
-} as any)
-const V2ContactRoute = V2ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => V2RouteRoute,
-} as any)
-const V2ServicesRoute = V2ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => V2RouteRoute,
-} as any)
-const V1WorkIndexRoute = V1WorkIndexRouteImport.update({
+const SiteWorkIndexRoute = SiteWorkIndexRouteImport.update({
   id: '/work/',
   path: '/work/',
-  getParentRoute: () => V1Route,
+  getParentRoute: () => SiteRoute,
 } as any)
-const V1WorkSlugRoute = V1WorkSlugRouteImport.update({
+const SiteWorkSlugRoute = SiteWorkSlugRouteImport.update({
   id: '/work/$slug',
   path: '/work/$slug',
-  getParentRoute: () => V1Route,
+  getParentRoute: () => SiteRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const V2WorkIndexRoute = V2WorkIndexRouteImport.update({
-  id: '/work/',
-  path: '/work/',
-  getParentRoute: () => V2RouteRoute,
-} as any)
-const V2WorkSlugRoute = V2WorkSlugRouteImport.update({
-  id: '/work/$slug',
-  path: '/work/$slug',
-  getParentRoute: () => V2RouteRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
-  '/v2': typeof V2RouteRouteWithChildren
-  '/': typeof V1IndexRoute
-  '/about': typeof V1AboutRoute
-  '/contact': typeof V1ContactRoute
-  '/services': typeof V1ServicesRoute
-  '/v2/about': typeof V2AboutRoute
-  '/v2/contact': typeof V2ContactRoute
-  '/v2/services': typeof V2ServicesRoute
-  '/v2/': typeof V2IndexRoute
-  '/work/$slug': typeof V1WorkSlugRoute
+  '/': typeof SiteIndexRoute
+  '/about': typeof SiteAboutRoute
+  '/contact': typeof SiteContactRoute
+  '/services': typeof SiteServicesRoute
+  '/work/$slug': typeof SiteWorkSlugRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/v2/work/$slug': typeof V2WorkSlugRoute
-  '/work/': typeof V1WorkIndexRoute
-  '/v2/work/': typeof V2WorkIndexRoute
+  '/work/': typeof SiteWorkIndexRoute
 }
 export interface FileRoutesByTo {
-  '/about': typeof V1AboutRoute
-  '/contact': typeof V1ContactRoute
-  '/services': typeof V1ServicesRoute
-  '/v2/about': typeof V2AboutRoute
-  '/v2/contact': typeof V2ContactRoute
-  '/v2/services': typeof V2ServicesRoute
-  '/': typeof V1IndexRoute
-  '/v2': typeof V2IndexRoute
-  '/work/$slug': typeof V1WorkSlugRoute
+  '/about': typeof SiteAboutRoute
+  '/contact': typeof SiteContactRoute
+  '/services': typeof SiteServicesRoute
+  '/': typeof SiteIndexRoute
+  '/work/$slug': typeof SiteWorkSlugRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/v2/work/$slug': typeof V2WorkSlugRoute
-  '/work': typeof V1WorkIndexRoute
-  '/v2/work': typeof V2WorkIndexRoute
+  '/work': typeof SiteWorkIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/v2': typeof V2RouteRouteWithChildren
-  '/_v1': typeof V1RouteWithChildren
-  '/_v1/about': typeof V1AboutRoute
-  '/_v1/contact': typeof V1ContactRoute
-  '/_v1/services': typeof V1ServicesRoute
-  '/v2/about': typeof V2AboutRoute
-  '/v2/contact': typeof V2ContactRoute
-  '/v2/services': typeof V2ServicesRoute
-  '/_v1/': typeof V1IndexRoute
-  '/v2/': typeof V2IndexRoute
-  '/_v1/work/$slug': typeof V1WorkSlugRoute
+  '/_site': typeof SiteRouteWithChildren
+  '/_site/about': typeof SiteAboutRoute
+  '/_site/contact': typeof SiteContactRoute
+  '/_site/services': typeof SiteServicesRoute
+  '/_site/': typeof SiteIndexRoute
+  '/_site/work/$slug': typeof SiteWorkSlugRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/v2/work/$slug': typeof V2WorkSlugRoute
-  '/_v1/work/': typeof V1WorkIndexRoute
-  '/v2/work/': typeof V2WorkIndexRoute
+  '/_site/work/': typeof SiteWorkIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/v2'
     | '/'
     | '/about'
     | '/contact'
     | '/services'
-    | '/v2/about'
-    | '/v2/contact'
-    | '/v2/services'
-    | '/v2/'
     | '/work/$slug'
     | '/api/auth/$'
-    | '/v2/work/$slug'
     | '/work/'
-    | '/v2/work/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/about'
     | '/contact'
     | '/services'
-    | '/v2/about'
-    | '/v2/contact'
-    | '/v2/services'
     | '/'
-    | '/v2'
     | '/work/$slug'
     | '/api/auth/$'
-    | '/v2/work/$slug'
     | '/work'
-    | '/v2/work'
   id:
     | '__root__'
-    | '/v2'
-    | '/_v1'
-    | '/_v1/about'
-    | '/_v1/contact'
-    | '/_v1/services'
-    | '/v2/about'
-    | '/v2/contact'
-    | '/v2/services'
-    | '/_v1/'
-    | '/v2/'
-    | '/_v1/work/$slug'
+    | '/_site'
+    | '/_site/about'
+    | '/_site/contact'
+    | '/_site/services'
+    | '/_site/'
+    | '/_site/work/$slug'
     | '/api/auth/$'
-    | '/v2/work/$slug'
-    | '/_v1/work/'
-    | '/v2/work/'
+    | '/_site/work/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  V2RouteRoute: typeof V2RouteRouteWithChildren
-  V1Route: typeof V1RouteWithChildren
+  SiteRoute: typeof SiteRouteWithChildren
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_v1': {
-      id: '/_v1'
+    '/_site': {
+      id: '/_site'
       path: ''
       fullPath: '/'
-      preLoaderRoute: typeof V1RouteImport
+      preLoaderRoute: typeof SiteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/v2': {
-      id: '/v2'
-      path: '/v2'
-      fullPath: '/v2'
-      preLoaderRoute: typeof V2RouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_v1/': {
-      id: '/_v1/'
+    '/_site/': {
+      id: '/_site/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof V1IndexRouteImport
-      parentRoute: typeof V1Route
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
     }
-    '/_v1/about': {
-      id: '/_v1/about'
+    '/_site/about': {
+      id: '/_site/about'
       path: '/about'
       fullPath: '/about'
-      preLoaderRoute: typeof V1AboutRouteImport
-      parentRoute: typeof V1Route
+      preLoaderRoute: typeof SiteAboutRouteImport
+      parentRoute: typeof SiteRoute
     }
-    '/_v1/contact': {
-      id: '/_v1/contact'
+    '/_site/contact': {
+      id: '/_site/contact'
       path: '/contact'
       fullPath: '/contact'
-      preLoaderRoute: typeof V1ContactRouteImport
-      parentRoute: typeof V1Route
+      preLoaderRoute: typeof SiteContactRouteImport
+      parentRoute: typeof SiteRoute
     }
-    '/_v1/services': {
-      id: '/_v1/services'
+    '/_site/services': {
+      id: '/_site/services'
       path: '/services'
       fullPath: '/services'
-      preLoaderRoute: typeof V1ServicesRouteImport
-      parentRoute: typeof V1Route
+      preLoaderRoute: typeof SiteServicesRouteImport
+      parentRoute: typeof SiteRoute
     }
-    '/v2/': {
-      id: '/v2/'
-      path: '/'
-      fullPath: '/v2/'
-      preLoaderRoute: typeof V2IndexRouteImport
-      parentRoute: typeof V2RouteRoute
-    }
-    '/v2/about': {
-      id: '/v2/about'
-      path: '/about'
-      fullPath: '/v2/about'
-      preLoaderRoute: typeof V2AboutRouteImport
-      parentRoute: typeof V2RouteRoute
-    }
-    '/v2/contact': {
-      id: '/v2/contact'
-      path: '/contact'
-      fullPath: '/v2/contact'
-      preLoaderRoute: typeof V2ContactRouteImport
-      parentRoute: typeof V2RouteRoute
-    }
-    '/v2/services': {
-      id: '/v2/services'
-      path: '/services'
-      fullPath: '/v2/services'
-      preLoaderRoute: typeof V2ServicesRouteImport
-      parentRoute: typeof V2RouteRoute
-    }
-    '/_v1/work/': {
-      id: '/_v1/work/'
+    '/_site/work/': {
+      id: '/_site/work/'
       path: '/work'
       fullPath: '/work/'
-      preLoaderRoute: typeof V1WorkIndexRouteImport
-      parentRoute: typeof V1Route
+      preLoaderRoute: typeof SiteWorkIndexRouteImport
+      parentRoute: typeof SiteRoute
     }
-    '/_v1/work/$slug': {
-      id: '/_v1/work/$slug'
+    '/_site/work/$slug': {
+      id: '/_site/work/$slug'
       path: '/work/$slug'
       fullPath: '/work/$slug'
-      preLoaderRoute: typeof V1WorkSlugRouteImport
-      parentRoute: typeof V1Route
+      preLoaderRoute: typeof SiteWorkSlugRouteImport
+      parentRoute: typeof SiteRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -299,67 +181,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/v2/work/': {
-      id: '/v2/work/'
-      path: '/work'
-      fullPath: '/v2/work/'
-      preLoaderRoute: typeof V2WorkIndexRouteImport
-      parentRoute: typeof V2RouteRoute
-    }
-    '/v2/work/$slug': {
-      id: '/v2/work/$slug'
-      path: '/work/$slug'
-      fullPath: '/v2/work/$slug'
-      preLoaderRoute: typeof V2WorkSlugRouteImport
-      parentRoute: typeof V2RouteRoute
-    }
   }
 }
 
-interface V2RouteRouteChildren {
-  V2AboutRoute: typeof V2AboutRoute
-  V2ContactRoute: typeof V2ContactRoute
-  V2ServicesRoute: typeof V2ServicesRoute
-  V2IndexRoute: typeof V2IndexRoute
-  V2WorkSlugRoute: typeof V2WorkSlugRoute
-  V2WorkIndexRoute: typeof V2WorkIndexRoute
+interface SiteRouteChildren {
+  SiteAboutRoute: typeof SiteAboutRoute
+  SiteContactRoute: typeof SiteContactRoute
+  SiteServicesRoute: typeof SiteServicesRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+  SiteWorkSlugRoute: typeof SiteWorkSlugRoute
+  SiteWorkIndexRoute: typeof SiteWorkIndexRoute
 }
 
-const V2RouteRouteChildren: V2RouteRouteChildren = {
-  V2AboutRoute: V2AboutRoute,
-  V2ContactRoute: V2ContactRoute,
-  V2ServicesRoute: V2ServicesRoute,
-  V2IndexRoute: V2IndexRoute,
-  V2WorkSlugRoute: V2WorkSlugRoute,
-  V2WorkIndexRoute: V2WorkIndexRoute,
+const SiteRouteChildren: SiteRouteChildren = {
+  SiteAboutRoute: SiteAboutRoute,
+  SiteContactRoute: SiteContactRoute,
+  SiteServicesRoute: SiteServicesRoute,
+  SiteIndexRoute: SiteIndexRoute,
+  SiteWorkSlugRoute: SiteWorkSlugRoute,
+  SiteWorkIndexRoute: SiteWorkIndexRoute,
 }
 
-const V2RouteRouteWithChildren =
-  V2RouteRoute._addFileChildren(V2RouteRouteChildren)
-
-interface V1RouteChildren {
-  V1AboutRoute: typeof V1AboutRoute
-  V1ContactRoute: typeof V1ContactRoute
-  V1ServicesRoute: typeof V1ServicesRoute
-  V1IndexRoute: typeof V1IndexRoute
-  V1WorkSlugRoute: typeof V1WorkSlugRoute
-  V1WorkIndexRoute: typeof V1WorkIndexRoute
-}
-
-const V1RouteChildren: V1RouteChildren = {
-  V1AboutRoute: V1AboutRoute,
-  V1ContactRoute: V1ContactRoute,
-  V1ServicesRoute: V1ServicesRoute,
-  V1IndexRoute: V1IndexRoute,
-  V1WorkSlugRoute: V1WorkSlugRoute,
-  V1WorkIndexRoute: V1WorkIndexRoute,
-}
-
-const V1RouteWithChildren = V1Route._addFileChildren(V1RouteChildren)
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  V2RouteRoute: V2RouteRouteWithChildren,
-  V1Route: V1RouteWithChildren,
+  SiteRoute: SiteRouteWithChildren,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport

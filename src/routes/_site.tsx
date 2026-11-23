@@ -1,15 +1,16 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { SiteFooter, SiteNav } from '#/components/Chrome'
+import { MotionProvider } from '#/components/motion'
 
-// v1 (Darkroom) layout: the original site at /. v2 lives at /v2 with its own chrome.
-export const Route = createFileRoute('/_v1')({
+// Public site layout: the nav and footer around every page.
+export const Route = createFileRoute('/_site')({
   component: () => (
-    <>
+    <MotionProvider>
       <SiteNav />
       <main id="main">
         <Outlet />
       </main>
       <SiteFooter />
-    </>
+    </MotionProvider>
   ),
 })

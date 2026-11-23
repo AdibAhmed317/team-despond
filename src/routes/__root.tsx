@@ -21,6 +21,10 @@ export const Route = createRootRoute({
       { property: 'og:type', content: 'website' },
     ],
     links: [
+      { rel: 'icon', href: '/favicon.ico', sizes: '48x48' },
+      { rel: 'icon', href: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+      { rel: 'manifest', href: '/site.webmanifest' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
       {
@@ -57,6 +61,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <HeadContent />
+        {/* Motion starts elements hidden until they enter the viewport; without JavaScript, show them. */}
+        <noscript>
+          <style>{'[data-m]{opacity:1!important;transform:none!important}'}</style>
+        </noscript>
       </head>
       <body>
         {children}

@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { Photo } from '#/components/Photo'
+import { RiseWords } from '#/components/motion'
 import { listServices } from '#/server/content'
 
-export const Route = createFileRoute('/_v1/services')({
+export const Route = createFileRoute('/_site/services')({
   loader: () => listServices(),
   head: () => ({
     meta: [
@@ -20,7 +21,7 @@ function Services() {
     <>
       <section className="page-head">
         <div className="container head-split">
-          <h1>Four kinds of shoot</h1>
+          <RiseWords as="h1" trigger="onLoad" text="Four kinds of shoot" />
           <p className="lead">Film, property, food and product. Each one planned, shot and cut by the same crew.</p>
         </div>
       </section>

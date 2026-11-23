@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { Photo } from '#/components/Photo'
+import { RiseWords } from '#/components/motion'
 import { photos, services } from '#/content/site'
 
-export const Route = createFileRoute('/_v1/about')({
+export const Route = createFileRoute('/_site/about')({
   head: () => ({
     meta: [
       { title: 'About: Team Despond' },
@@ -27,7 +28,7 @@ function About() {
       <section className="page-head page-head--split">
         <div className="container about-head">
           <div>
-            <h1>Pictures that do a job</h1>
+            <RiseWords as="h1" trigger="onLoad" text="Pictures that do a job" />
             <p className="lead">
               Team Despond is a creative production and visual media studio in Sydney. We make film, photography and
               video for brands that sell on how they look.
@@ -46,7 +47,7 @@ function About() {
 
       <section className="section" aria-labelledby="approach-head">
         <div className="container">
-          <h2 id="approach-head">How a shoot runs</h2>
+          <RiseWords id="approach-head" text="How a shoot runs" />
           <ol className="steps" role="list">
             {stages.map((s, i) => (
               <li key={s.title}>
@@ -63,7 +64,7 @@ function About() {
 
       <section className="section well grained" aria-labelledby="cap-head">
         <div className="container sheet-wrap">
-          <h2 id="cap-head">What we make</h2>
+          <RiseWords id="cap-head" text="What we make" />
           <dl className="sheet">
             {services.map((s) => (
               <div key={s.slug} className="sheet__row">

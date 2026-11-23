@@ -1,11 +1,12 @@
 /* Hallmark · shape: Bento Grid (services) + Index (work) · genre: atmospheric · theme: Darkroom (deal 2/3, seed sydney-film-photography-videography-cc5f·335fcd4e·2026-11-19·r0) · job: hire · draw: 1abc86
- * hero: Ledge · nav: edge-aligned · footer: mast · imagery: photographs, library 12, colour (deep) · signature: rack-focus hero, a WebGL focus pull between the four disciplines · darkroom: amber, colour prints, motion widened by request
- * axes: dark/display-condensed/chromatic-amber · posture: restrained · contrast: pass · fold: pass · copy: verbatim (hero, CTA heads and buttons from the client brief) · v2.0.0 */
+ * hero: Ledge · nav: edge-aligned · footer: mast · imagery: photographs, library 12, colour (deep) · signature: rack-focus hero, a WebGL focus pull between the four disciplines · darkroom: red (matched to the client logo, #ef3536), colour prints, motion widened by request
+ * axes: dark/display-condensed/chromatic-red · posture: restrained · contrast: pass · fold: pass · copy: verbatim (hero, CTA heads and buttons from the client brief) · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H5 E4 S4 R4 V4 · weakest: S, a studio page could be anyone's; the hero pulls focus the way their own camera does, on their four disciplines */
 /* Hallmark · dismissed 34 · html and body carry overflow-x: clip in base.css; the static pass reads routes without it */
 /* Hallmark · dismissed 56 · the two sticky headers belong to the dev-only TanStack devtools panel, absent in production */
 /* Hallmark · waive 83 · eight frames over 37% below the hero · a studio whose work is the pitch reads as a portfolio (Portfolio Grid allows 45%), and every frame is a slot for their own work */
 /* Hallmark · waive 77 · selected work spans 12 columns, preview on 7 and rows on 5 · the sticky preview is absolutely stacked frames, which the width probe reads as empty */
+/* Hallmark · dismissed 54 · <RiseWords> renders a real h1 or h2 (its as prop); the static pass reads the component name, the rendered page has the heading */
 /* Hallmark · waive 6b · Ledge hero head runs ten columns left, never centred · the brief's nine-word headline needs the width */
 
 @import 'tailwindcss';
@@ -68,7 +69,9 @@ main a:not([class]):hover { text-decoration-color: var(--color-accent); }
 .nav { position: fixed; inset: 0 0 auto; z-index: var(--z-sticky-nav); border-bottom: var(--rule-hair) solid transparent; transition: background-color var(--dur-long) var(--ease-out), border-color var(--dur-long) var(--ease-out); }
 .nav[data-solid] { background: var(--color-paper); border-bottom-color: var(--color-rule); }
 .nav__bar { display: flex; align-items: center; justify-content: space-between; min-height: 72px; gap: var(--space-lg); }
-.wordmark { font: 400 var(--text-xl)/1 var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; color: var(--color-ink); }
+.wordmark { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+.wordmark img { display: block; width: auto; height: 22px; }
+@media (max-width: 40rem) { .wordmark img { height: 18px; } }
 .wordmark:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 4px; }
 .nav__links { display: flex; gap: var(--space-xl); }
 .nav__link { color: var(--color-ink-2); text-decoration: none; padding-block: var(--space-xs); border-bottom: var(--rule-hair) solid transparent; transition: color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out); }
@@ -343,7 +346,9 @@ main a:not([class]):hover { text-decoration-color: var(--color-accent); }
 
 /* ---------- footer: mast ---------- */
 .footer { padding-block: var(--space-3xl) var(--space-xl); border-top: var(--rule-hair) solid var(--color-rule); }
-.footer__mast { margin: 0 0 var(--space-2xl); font: 200 clamp(4rem, 21.5vw, 19.5rem)/0.9 var(--font-display); text-transform: uppercase; white-space: nowrap; letter-spacing: var(--tracking-display); }
+/* The client's logo is a 437px raster; it is shown at or below its own width so it stays sharp. A vector file would let the mast run the full container. */
+.footer__mast { margin: 0 0 var(--space-2xl); }
+.footer__mast img { display: block; width: min(100%, 437px); height: auto; }
 .footer__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap-columns); padding-top: var(--space-lg); border-top: var(--rule-hair) solid var(--color-rule); }
 .footer__grid p { color: var(--color-ink-2); }
 .footer__links { display: grid; gap: var(--space-xs); margin: 0; padding: 0; }
@@ -353,3 +358,30 @@ main a:not([class]):hover { text-decoration-color: var(--color-accent); }
 .footer__credits { margin-top: var(--space-sm); max-width: none; font-size: var(--text-xs); color: var(--color-muted); }
 .footer__credits a { color: var(--color-muted); }
 @media (max-width: 40rem) { .footer__grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- motion: headline rise, page transitions, the reel ---------- */
+.rise__mask { display: inline-block; overflow: clip; overflow-clip-margin: 0.08em; vertical-align: top; }
+.rise__word { display: inline-block; }
+.js .rise .rise__word { animation: rise 900ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 45ms + 120ms); }
+@keyframes rise { from { transform: translateY(105%); } }
+
+/* Native View Transitions (router defaultViewTransition): the page crossfades,
+   the nav holds still, and a project photo with the same name morphs between pages. */
+.nav { view-transition-name: site-nav; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 280ms; }
+::view-transition-group(*.photo) { animation-duration: 600ms; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+::view-transition-old(*.photo), ::view-transition-new(*.photo) { width: 100%; height: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+  .js .rise .rise__word { animation: none; }
+}
+
+.reel { position: relative; height: 320vh; }
+.reel__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--color-paper); }
+.reel__canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 800ms var(--ease-out); }
+.reel__canvas[data-ready] { opacity: 1; }
+.reel__ui { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding-top: calc(72px + var(--space-lg)); padding-bottom: var(--space-xl); pointer-events: none; }
+.reel__hint { color: var(--color-muted); font-size: var(--text-sm); }
+.reel__now { display: flex; align-items: baseline; gap: var(--space-lg); min-height: var(--text-display-s); }
+.reel__title { font: 200 var(--text-display-s)/1 var(--font-display); text-transform: uppercase; }
+.reel__cat { color: var(--color-ink-2); font-size: var(--text-sm); }

@@ -4,12 +4,12 @@ import { Hero } from '#/components/Hero'
 import { Photo } from '#/components/Photo'
 import { EnquiryForm } from '#/components/EnquiryForm'
 import { Fill, Socials } from '#/components/Chrome'
-import { useReveal } from '#/components/useReveal'
+import { Reveal, RiseWords } from '#/components/motion'
 import { contact, serviceBySlug } from '#/content/site'
 import type { Project } from '#/content/site'
 import { listProjects, listServices } from '#/server/content'
 
-export const Route = createFileRoute('/_v1/')({
+export const Route = createFileRoute('/_site/')({
   loader: async () => {
     const [services, featured] = await Promise.all([listServices(), listProjects({ data: { featured: true } })])
     return { services, featured }
@@ -26,7 +26,6 @@ const reasons = [
 
 function Home() {
   const { services, featured } = Route.useLoaderData()
-  useReveal()
 
   return (
     <>
@@ -35,12 +34,12 @@ function Home() {
       <section className="section" aria-labelledby="services-head">
         <div className="container">
           <div className="head-split">
-            <h2 id="services-head">What we shoot</h2>
+            <RiseWords id="services-head" text="What we shoot" />
             <p className="lead">Four kinds of work, one crew from the first call to the final cut.</p>
           </div>
           <ol className="bento" role="list">
             {services.map((s, i) => (
-              <li key={s.slug} className="tile" data-reveal style={{ '--i': i } as React.CSSProperties}>
+              <Reveal as="li" key={s.slug} className="tile" delay={i * 0.08}>
                 <Photo
                   photo={s.photo}
                   slot={`service-${s.slug}`}
@@ -58,7 +57,7 @@ function Home() {
                     View more<span className="visually-hidden"> about {s.name.toLowerCase()}</span>
                   </Link>
                 </div>
-              </li>
+              </Reveal>
             ))}
           </ol>
         </div>
@@ -68,9 +67,7 @@ function Home() {
 
       <section className="section well grained" aria-labelledby="about-head">
         <div className="container statement">
-          <h2 id="about-head" className="statement__line">
-            A Sydney crew for film, property, food and product, telling each one as a story.
-          </h2>
+          <RiseWords id="about-head" className="statement__line" text="A Sydney crew for film, property, food and product, telling each one as a story." />
           <div className="statement__foot">
             <p>
               Team Despond is a creative production and visual media studio. We plan, shoot and cut the pictures
@@ -85,7 +82,7 @@ function Home() {
 
       <section className="section" aria-labelledby="why-head">
         <div className="container sheet-wrap">
-          <h2 id="why-head">Why book us</h2>
+          <RiseWords id="why-head" text="Why book us" />
           <dl className="sheet">
             {reasons.map((r) => (
               <div key={r.title} className="sheet__row">
@@ -100,7 +97,7 @@ function Home() {
       <section className="section section--close" id="enquire" aria-labelledby="enquire-head">
         <div className="container form-split">
           <div className="form-split__head">
-            <h2 id="enquire-head">Have a project in mind?</h2>
+            <RiseWords id="enquire-head" text="Have a project in mind?" />
             <p className="lead">Tell us what you are making. We come back with a plan and a quote.</p>
             <dl className="facts">
               <div>
@@ -134,7 +131,7 @@ function FeaturedWork({ projects }: { projects: Project[] }) {
     <section className="section section--l" aria-labelledby="work-head">
       <div className="container">
         <div className="head-split">
-          <h2 id="work-head">Selected work</h2>
+          <RiseWords id="work-head" text="Selected work" />
           <Link to="/work" className="text-link">
             Every project
           </Link>
@@ -149,6 +146,7 @@ function FeaturedWork({ projects }: { projects: Project[] }) {
                 want={`Cover frame of a featured project: ${p.title}`}
                 sizes="(min-width: 60rem) 55vw, 1px"
                 className={i === lit ? 'index__frame is-on' : 'index__frame'}
+                vt={i === lit ? `project-${p.slug}` : undefined}
               />
             ))}
           </div>

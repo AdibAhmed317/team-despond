@@ -23,10 +23,10 @@
   --color-ink-2: oklch(80% 0.012 75);
   --color-muted: oklch(64% 0.012 65);
   --color-rule: oklch(29% 0.01 55);
-  --color-accent: oklch(73% 0.15 58);
-  --color-accent-deep: oklch(50% 0.11 52);
+  --color-accent: oklch(62.3% 0.221 26.3);
+  --color-accent-deep: oklch(46% 0.17 27);
   --color-accent-ink: oklch(12.5% 0.008 55);
-  --color-focus: oklch(73% 0.15 58);
+  --color-focus: oklch(66% 0.2 26);
   --font-display: "Sofia Sans Extra Condensed", ui-sans-serif, sans-serif;
   --font-body: "Barlow", ui-sans-serif, sans-serif;
   --font-outlier: var(--font-body);

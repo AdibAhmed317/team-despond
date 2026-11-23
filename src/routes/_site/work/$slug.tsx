@@ -4,7 +4,7 @@ import { VideoEmbed } from '#/components/VideoEmbed'
 import { serviceBySlug } from '#/content/site'
 import { getProject } from '#/server/content'
 
-export const Route = createFileRoute('/_v1/work/$slug')({
+export const Route = createFileRoute('/_site/work/$slug')({
   loader: ({ params }) => getProject({ data: params.slug }),
   head: ({ loaderData }) => ({
     meta: loaderData
@@ -35,6 +35,7 @@ function ProjectPage() {
         <Photo
           photo={p.cover}
           slot="case-cover"
+          vt={`project-${p.slug}`}
           want={`The cover frame of ${p.title}`}
           className="case-head__photo"
           priority

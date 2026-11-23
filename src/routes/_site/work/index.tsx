@@ -1,13 +1,14 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { Photo } from '#/components/Photo'
-import { useReveal } from '#/components/useReveal'
+import { Reveal, RiseWords } from '#/components/motion'
+import { Reel } from '#/components/Reel'
 import { serviceBySlug, services } from '#/content/site'
 import type { CategorySlug } from '#/content/site'
 import { listProjects } from '#/server/content'
 
 const slugs = services.map((s) => s.slug)
 
-export const Route = createFileRoute('/_v1/work/')({
+export const Route = createFileRoute('/_site/work/')({
   validateSearch: (s: Record<string, unknown>): { category?: CategorySlug } =>
     slugs.includes(s.category as CategorySlug) ? { category: s.category as CategorySlug } : {},
   loaderDeps: ({ search }) => ({ category: search.category }),
@@ -24,13 +25,13 @@ export const Route = createFileRoute('/_v1/work/')({
 function Work() {
   const projects = Route.useLoaderData()
   const { category } = Route.useSearch()
-  useReveal(category)
+  const nameOf = (slug: string) => serviceBySlug(slug)?.name ?? slug
 
   return (
     <>
       <section className="page-head">
         <div className="container">
-          <h1>The work</h1>
+          <RiseWords as="h1" trigger="onLoad" text="The work" />
           <nav className="filters" aria-label="Filter by category">
             <Link to="/work" search={{}} className="filter" aria-current={!category ? 'page' : undefined}>
               All
@@ -50,16 +51,19 @@ function Work() {
         </div>
       </section>
 
+      {!category ? <Reel projects={projects} nameOf={nameOf} /> : null}
+
       <section className="section section--top0" aria-label="Projects">
         <div className="container">
           {projects.length ? (
             <ul className="grid-work" role="list">
               {projects.map((p, i) => (
-                <li key={p.slug} data-reveal style={{ '--i': i % 3 } as React.CSSProperties}>
+                <Reveal as="li" key={p.slug} delay={(i % 3) * 0.08}>
                   <Link to="/work/$slug" params={{ slug: p.slug }} className="card">
                     <Photo
                       photo={p.cover}
                       slot={`work-${p.slug}`}
+                      vt={`project-${p.slug}`}
                       want={`Cover frame for ${p.title}`}
                       sizes="(min-width: 60rem) 30vw, (min-width: 40rem) 50vw, 100vw"
                       className="card__photo"
@@ -71,7 +75,7 @@ function Work() {
                       {p.location ? <span>{p.location}</span> : null}
                     </p>
                   </Link>
-                </li>
+                </Reveal>
               ))}
             </ul>
           ) : (

@@ -13,11 +13,14 @@ type Props = {
   className?: string
   imgClassName?: string
   children?: React.ReactNode
+  /** View-transition name: the same name on two pages makes the photo morph between them. */
+  vt?: string
 }
 
-export function Photo({ photo, slot, want, sizes = '100vw', priority, cors, className, imgClassName, children }: Props) {
+export function Photo({ photo, slot, want, sizes = '100vw', priority, cors, className, imgClassName, children, vt }: Props) {
+  const vtStyle = vt ? ({ viewTransitionName: vt, viewTransitionClass: 'photo' } as React.CSSProperties) : undefined
   return (
-    <figure className={cn('photo', className)} data-slot={slot} data-alt={want ?? photo.alt}>
+    <figure className={cn('photo', className)} data-slot={slot} data-alt={want ?? photo.alt} style={vtStyle}>
       <img
         className={imgClassName}
         src={photo.src}

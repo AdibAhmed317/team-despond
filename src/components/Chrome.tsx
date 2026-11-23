@@ -37,7 +37,7 @@ export function SiteNav() {
       <header className="nav" data-solid={solid || open || undefined}>
         <div className="container nav__bar">
           <Link to="/" className="wordmark" aria-label="Team Despond, home">
-            Team Despond
+            <img src="/logo-wordmark.png" alt="" width={437} height={53} />
           </Link>
           <button
             type="button"
@@ -79,8 +79,8 @@ export function SiteFooter() {
   return (
     <footer className="footer">
       <div className="container">
-        <p className="footer__mast" aria-hidden="true">
-          Team Despond
+        <p className="footer__mast">
+          <img src="/logo-wordmark.png" alt="Team Despond" width={437} height={53} loading="lazy" />
         </p>
         <div className="footer__grid">
           <nav aria-label="Footer">
